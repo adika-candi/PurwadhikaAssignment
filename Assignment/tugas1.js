@@ -1,4 +1,3 @@
-
 //  tugas 1
 
 // var namaSiswa=prompt("Nama siswa :")
@@ -78,7 +77,7 @@
 //     do{
 //         pilihan=prompt("Selamat datang di Pasar Online\nDaftar Menu:\n1. Ayam @ Rp.25.000\n2.Ikan @ Rp.50.000\n3. Sapi @ Rp.75.000")
 //         pilihan=parseInt(pilihan)
-        
+
 //     }while(numberCheck(pilihan,3)==false)
 
 //     do{
@@ -142,8 +141,9 @@
 // for(i=1;i<number;i++){
 
 //     factorial=factorial*(number-i)
-    
+
 // }
 
 // console.log(factorial)
 
+//test
