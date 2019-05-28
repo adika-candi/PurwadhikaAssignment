@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script defer src="7segments.js"></script> -->
+    <style>
+        table,
+        tr,
+        td {
+            border: black solid;
+            padding: 10px;
+            border-collapse: collapse
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <p>INPUT: <input type="number" id="inputSegment"></p>
+    </form>
+    <p> <button onclick="showSegment()">Lihat</button></p>
+
+
+    <table>
+        <tr id="printTable">
+        </tr>
+    </table>
+
+</body>
+
+<script>
+    var one = "|<br>|"
+    var two = "_<br>_|<br>|_"
+    var three = "_<br>_|<br>_|"
+    var four = " |_|<br>&nbsp&nbsp&nbsp|"
+    var five = "_<br>|_<br>_|"
+    var six = "_<br>|_<br>|_|"
+    var seven = "_<br>&nbsp&nbsp|<br>&nbsp&nbsp|"
+    var eight = "&nbsp_<br>|_|<br>|_|"
+    var nine = "_<br>|_|<br>&nbsp_|"
+    var zero = "_<br>|&nbsp&nbsp|<br>|_|"
+
+    var printSegment = ""
+    var input = document.getElementById("inputSegment")
+
+    var showSegment = () => {
+        console.log(input)
+        inputNumber = input.value
+        console.log(inputNumber)
+        for (i = 0; i < inputNumber.length; i++) {
+            console.log(inputNumber.charAt(i))
+            sevenSegment(inputNumber.charAt(i))
+        }
+        document.getElementById("printTable").innerHTML = printSegment
+            //console.log(printSegment)
+    }
+
+    var sevenSegment = (num) => {
+        if (num == "1") {
+            printSegment += `<td>${one}</td>`
+            console.log("one")
+        } else if (num == "2") {
+            printSegment += `<td>${two}</td>`
+        } else if (num == "3") {
+            printSegment += `<td>${three}</td>`
+        } else if (num == "4") {
+            printSegment += `<td>${four}</td>`
+        } else if (num == "5") {
+            printSegment += `<td>${five}</td>`
+        } else if (num == "6") {
+            printSegment += `<td>${six}</td>`
+        } else if (num == "7") {
+            printSegment += `<td>${seven}</td>`
+        } else if (num == "8") {
+            printSegment += `<td>${eight}</td>`
+        } else if (num == "9") {
+            printSegment += `<td>${nine}</td>`
+        } else if (num == "0") {
+            printSegment += `<td>${zero}</td>`
+        }
+
+    }
+    showSegment()
+</script>
+
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: black solid;
+            padding: 5px;
+            border-collapse: collapse
+        }
+    </style>
+</head>
+
+<body>
+
+    <form>
+        <p> <strong> Arah: </strong> <input type="radio" name="Arah" value="kiri">kiri <input type="radio" name="Arah" value="kanan">kanan</p>
+
+        Berapa kali : <input type="number" name="kali" id="kali">
+    </form>
+    <br>
+    <button onclick="spin()">Putar</button>
+
+    <br><br>
+
+    <table id="mainTable">
+
+    </table>
+
+    </p>
+
+</body>
+
+<script>
+    var arrOri = [
+        [],
+        [],
+        [],
+        []
+    ]
+    var arrTemp = [
+        [],
+        [],
+        [],
+        []
+    ]
+
+    var buttonID = 0
+    var arrSort = []
+    var sortStatus = 0
+
+    arrOri[0][0] = 1
+    arrOri[0][1] = 2
+    arrOri[0][2] = 3
+    arrOri[0][3] = 4
+
+    arrOri[1][0] = 5
+    arrOri[1][1] = 6
+    arrOri[1][2] = 7
+    arrOri[1][3] = 8
+
+    arrOri[2][0] = 9
+    arrOri[2][1] = 10
+    arrOri[2][2] = 11
+    arrOri[2][3] = 12
+
+    arrOri[3][0] = 13
+    arrOri[3][1] = 14
+    arrOri[3][2] = 15
+    arrOri[3][3] = 16
+
+    var times
+    var direction
+    var spinDirection
+
+
+    var spin = () => {
+
+        var times = document.getElementById("kali").value
+        var direction = document.getElementsByName("Arah")
+        var spinDirection
+
+        for (i = 0; i < direction.length; i++) {
+            if (direction[i].checked == true) {
+                spinDirection = direction[i].value
+            }
+        }
+
+        console.log(spinDirection)
+        console.log(times)
+
+        if (spinDirection == "kanan") {
+            if (times % 2 == 0 && times % 4 == 0) {
+                printTable()
+            } else if (times % 3 == 0) {
+                for (y = 0; y < 4; y++) {
+                    for (x = 0; x < 4; x++) {
+                        arrTemp[y][x] = arrOri[x][3 - y]
+                    }
+                }
+                arrOri = [
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+                arrOri = arrTemp
+                console.log(arrOri)
+                printTable()
+            } else if (times % 2 == 0 && times % 4 != 0) {
+                for (y = 0; y < 4; y++) {
+                    for (x = 0; x < 4; x++) {
+                        arrTemp[y][x] = arrOri[3 - y][3 - x]
+                    }
+                }
+                arrOri = [
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+                arrOri = arrTemp
+                printTable()
+            } else {
+                for (y = 0; y < 4; y++) {
+                    for (x = 0; x < 4; x++) {
+                        arrTemp[y][x] = arrOri[3 - x][y]
+                    }
+                }
+                arrOri = [
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+                arrOri = arrTemp
+                printTable()
+            }
+        } else {
+            if (times % 2 == 0 && times % 4 == 0) {
+                printTable()
+            } else if (times % 3 == 0) {
+                for (y = 0; y < 4; y++) {
+                    for (x = 0; x < 4; x++) {
+                        arrTemp[y][x] = arrOri[3 - x][y]
+                    }
+                }
+                arrOri = [
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+                arrOri = arrTemp
+                console.log(arrOri)
+                printTable()
+            } else if (times % 2 == 0 && times % 4 != 0) {
+                for (y = 0; y < 4; y++) {
+                    for (x = 0; x < 4; x++) {
+                        arrTemp[y][x] = arrOri[3 - y][3 - x]
+                    }
+                }
+                arrOri = [
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+                arrOri = arrTemp
+                printTable()
+            } else {
+                for (y = 0; y < 4; y++) {
+                    for (x = 0; x < 4; x++) {
+                        arrTemp[y][x] = arrOri[3 - x][y]
+                    }
+                }
+                arrOri = [
+                    [],
+                    [],
+                    [],
+                    []
+                ]
+                arrOri = arrTemp
+                printTable()
+            }
+        }
+
+    }
+
+    var sort = (xy, coordinate, bID) => {
+        arrSort = []
+        console.log(bID)
+        console.log(buttonID)
+
+        if (xy == 0) {
+            for (i = 0; i < 4; i++) {
+                arrSort.push(arrOri[coordinate][i])
+            }
+        } else {
+            for (i = 0; i < 4; i++) {
+                arrSort.push(arrOri[i][coordinate])
+            }
+        }
+        if (isNaN(buttonID)) {
+            arrSort.sort(function(a, b) {
+                return a - b
+            })
+            sortStatus = 1
+            buttonID = bID
+        } else if (buttonID != bID) {
+            arrSort.sort(function(a, b) {
+                return a - b
+            })
+            buttonID = bID
+            sortStatus = 1
+            console.log("sorted ascending")
+        } else if (buttonID == bID) {
+            buttonID = bID
+            if (sortStatus == 0) {
+                sortStatus = 1
+                arrSort.sort(function(a, b) {
+                    return a - b
+                })
+                console.log("sorted ascending")
+            } else if (sortStatus == 1) {
+                sortStatus = 0
+                arrSort.sort(function(a, b) {
+                    return b - a
+                })
+                console.log("sorted descending")
+            }
+        }
+
+        if (xy == 0) {
+            for (i = 0; i < 4; i++) {
+                arrOri[coordinate][i] = arrSort[i]
+            }
+        } else {
+            for (i = 0; i < 4; i++) {
+                arrOri[i][coordinate] = arrSort[i]
+            }
+        }
+        printTable()
+    }
+
+    var printTable = () => {
+        for (x = 0; x < 4; x++) {
+            for (y = 0; y < 4; y++) {
+                document.getElementById(`${x}${y}`).innerText = arrOri[x][y]
+            }
+        }
+    }
+
+    var createTable = () => {
+        var tble = ""
+        for (y = 0; y <= 4; y++) {
+            tble += `<tr>`
+            for (x = 0; x <= 4; x++) {
+                tble += `<td id = "${y}${x}" > </td>`
+            }
+            tble += `</tr>`
+        }
+        document.getElementById("mainTable").innerHTML = tble
+    }
+
+    var createButton = () => {
+        for (i = 0; i < 4; i++) {
+            document.getElementById(`${i}4`).innerHTML = `<button onclick = "sort(0,${i},${i+1})" > Sort </button>`
+            document.getElementById(`4${i}`).innerHTML = `<button onclick = "sort(1,${i},${i+4})" > Sort </button>`
+        }
+    }
+    initiateSize()
+    createTable()
+    createButton()
+    printTable()
+</script>
+
+</html>
